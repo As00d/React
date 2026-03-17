@@ -75,15 +75,7 @@ function Menu() {
       {pizzaLength > 0 ? (
         <ul className="pizzas">
           {pizzas.map((pizza) => {
-            return (
-              <Pizza
-                key={pizza.name}
-                photoName={pizza.photoName}
-                name={pizza.name}
-                ingredients={pizza.ingredients}
-                price={pizza.price}
-              />
-            );
+            return <Pizza pizza={pizza} key={pizza.name} />;
           })}
         </ul>
       ) : (
@@ -93,7 +85,19 @@ function Menu() {
   );
 }
 
-function Pizza({ photoName, name, ingredients, price }) {
+function Pizza({ pizza: { name, photoName, ingredients, price, soldOut } }) {
+  if (soldOut) {
+    return (
+      <li className="pizza sold-out">
+        <img src={photoName} alt={photoName} />
+        <div>
+          <h3>{name}</h3>
+          <p>{ingredients}</p>
+          <span>{price}</span>
+        </div>
+      </li>
+    );
+  }
   return (
     <li className="pizza">
       <img src={photoName} alt={photoName} />
@@ -115,10 +119,7 @@ function Footer() {
   return (
     <footer className="footer">
       {isOpen ? (
-        <div className="order">
-          <p>We are open until {closeHour}:00. Come visit us or order online</p>
-          <button className="btn">Order</button>
-        </div>
+        <Order closeHour={closeHour} />
       ) : (
         <p>
           We are happy to welcome you between {openHour}:00 and {closeHour}:00
@@ -128,6 +129,14 @@ function Footer() {
   );
 }
 
+function Order({ closeHour }) {
+  return (
+    <div className="order">
+      <p>We are open until {closeHour}:00. Come visit us or order online</p>
+      <button className="btn">Order</button>
+    </div>
+  );
+}
 // React 18
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
