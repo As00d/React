@@ -15,7 +15,7 @@ const pizzaData = [
     ingredients: "Tomato and mozarella",
     price: 10,
     photoName: "pizzas/margherita.jpg",
-    soldOut: false,
+    soldOut: true,
   },
   {
     name: "Pizza Spinaci",
@@ -73,11 +73,17 @@ function Menu() {
     <main className="menu">
       <h2>Our Menu</h2>
       {pizzaLength > 0 ? (
-        <ul className="pizzas">
-          {pizzas.map((pizza) => {
-            return <Pizza pizza={pizza} key={pizza.name} />;
-          })}
-        </ul>
+        <>
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from. All
+            from our stone oven, all organic, all delicious.
+          </p>
+          <ul className="pizzas">
+            {pizzas.map((pizza) => {
+              return <Pizza pizza={pizza} key={pizza.name} />;
+            })}
+          </ul>
+        </>
       ) : (
         <p>We are currently out of stock</p>
       )}
@@ -86,25 +92,13 @@ function Menu() {
 }
 
 function Pizza({ pizza: { name, photoName, ingredients, price, soldOut } }) {
-  if (soldOut) {
-    return (
-      <li className="pizza sold-out">
-        <img src={photoName} alt={photoName} />
-        <div>
-          <h3>{name}</h3>
-          <p>{ingredients}</p>
-          <span>{price}</span>
-        </div>
-      </li>
-    );
-  }
   return (
-    <li className="pizza">
+    <li className={soldOut ? "pizza sold-out" : "pizza"}>
       <img src={photoName} alt={photoName} />
       <div>
         <h3>{name}</h3>
         <p>{ingredients}</p>
-        <span>{price}</span>
+        <span>{soldOut ? "SOLD OUT" : price}</span>
       </div>
     </li>
   );
