@@ -5,3 +5,7 @@
 ## Practise application code
 
 <img width="1710" height="1107" alt="Image" src="https://github.com/user-attachments/assets/574c5659-0602-4fe0-9735-8422a05706ce" />
+
+## Practise profile card 2
+
+<img width="1708" height="951" alt="Image" src="https://github.com/user-attachments/assets/d7de4d30-60cb-4e95-9c49-d300ab9fe258" />
